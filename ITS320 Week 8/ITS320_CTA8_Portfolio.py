@@ -10,12 +10,20 @@ class automobile:
     def __init__(self):
         self.list_of_vehicles = []
 
-    def add_vehicle(self, make, model, color, year, mileage):
+    def add_vehicle(self):
+        make = input("What is the make of the car: ")
+        model = input("What is the model of the car: ")
+        color = input("What is the color of the car: ")
+        year = input("WHat is the year of the car: ")
+        mileage = input("What is the mileage of the car: ")
         self.list_of_vehicles.append(vehicle(make, model, color, year, mileage))
 
     def remove_vehicle(self, make, model, color, year, mileage):
-        to_remove = vehicle(make, model, color, year, mileage)
-        self.list_of_vehicles.remove(to_remove)
+        self.to_string()
+        num = int(input("What car would you like to remove (enter number of car): "))
+        while num < 1 and num > len(self.list_of_vehicles):
+            num = input("Please enter a valid car you would like to remove (enter number of car): ")
+        self.list_of_vehicles.remove(self.list_of_vehicles[num - 1])
 
     def to_string(self):
         for i in range(len(self.list_of_vehicles)):
