@@ -4,7 +4,8 @@ def reverse_strings(S):
         if (i == 0 or i == 1):
             result += S[i]
         else:
-            result += S[i] [::-1]
+            print(result)
+            print(S[i] [::-1])
     return result
 
 
@@ -13,7 +14,7 @@ def main():
     for i in range(3):
         strings.append(input("Please enter string #" + str(i + 1) + ": "))
 
-    print(reverse_strings(strings))
+    reverse_strings(strings)
 
 if __name__ == "__main__":
     main()
