@@ -1,3 +1,23 @@
+#-------------------------------------------
+# Program Name: Reverse Third String
+# Author: Ryan Juelsgaard
+# Date:10 / 12 / 2023
+#-------------------------------------------
+# Pseudocode:
+# loop 3 times {
+# input(string to be added)
+# append string to list
+# }
+# call function
+# loop through list in reverse {
+# first and second time add string to result string
+# third time print result string
+# print last string in reverse
+# }
+#-------------------------------------------
+# Program Inputs: Strings
+# Program Outputs: Strings in reverse order of given
+#-------------------------------------------
 def reverse_strings(S):
     result = ''
     for i in range(len(S)):

@@ -1,3 +1,18 @@
+#-------------------------------------------
+# Program Name: Car Price per Year
+# Author: Ryan Juelsgaard  
+# Date: 10 / 12 / 2023
+#-------------------------------------------
+# Pseudocode: 
+#
+# input(year of car)
+# if (not valid year) {ask again for a valid year }
+# if statment with elif (car year matches){ print price}
+#-------------------------------------------
+# Program Inputs: Year of car
+# Program Outputs: Price of Car at given year
+#-------------------------------------------
+
 def main(): 
     year = input("What year is the car: ")
     while(year < '1962' or year > '2014'):

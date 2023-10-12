@@ -1,3 +1,19 @@
+#-------------------------------------------
+# Program Name: Floating point calculator
+# Author: Ryan Juelsgaard
+# Date:10 / 12 / 2023
+#-------------------------------------------
+# Pseudocode: for loop with range 5 {
+# float(input(floating point number))
+# add to total
+# check if number is min or max
+# append number with interest to a list 
+# }
+# print(all needed info)
+#-------------------------------------------
+# Program Inputs: Floating point number
+# Program Outputs: total, average, max, min, and a list of the numbers with interest
+#-------------------------------------------
 def main():
     nums = []
     total = 0

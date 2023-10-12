@@ -1,3 +1,22 @@
+#-------------------------------------------
+# Program Name: Cartesian
+# Author: Ryan Juelsgaard
+# Date:10 / 12 / 2023
+#-------------------------------------------
+# Pseudocode:
+# Set A list
+# Set B list
+# call function
+# loop through A list {
+#   loop through B list {
+#       add the formated string with both values of A and B to another List
+#   }
+# }
+# print result list
+#-------------------------------------------
+# Program Inputs: none
+# Program Outputs: List of strings the have ("valueA" x "valueB")
+#-------------------------------------------
 def cartesian(A, B):
     result = []
     for i in A:
