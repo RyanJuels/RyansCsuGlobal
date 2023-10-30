@@ -7,6 +7,7 @@
 # float(input(floating point number))
 # add to total
 # check if number is min or max
+#}
 # print(all needed info)
 #-------------------------------------------
 # Program Inputs: Floating point number
