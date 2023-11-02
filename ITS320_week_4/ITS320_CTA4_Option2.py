@@ -17,7 +17,7 @@ def main():
     total = 0
 
     for i in range(5):
-        num = float(input("Please enter your grade: "))
+        num = int(input("Please enter your grade: "))
         total += num
         if i == 0:
             minimum = num
