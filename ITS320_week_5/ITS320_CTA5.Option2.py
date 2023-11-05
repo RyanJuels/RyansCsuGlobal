@@ -21,7 +21,7 @@
 def reverse_strings(S):
     result = ''
     for i in range(len(S)):
-        if (i == 0 or i == 1):
+        if (i != len(S) - 1):
             result += S[i]
         else:
             print(result)
