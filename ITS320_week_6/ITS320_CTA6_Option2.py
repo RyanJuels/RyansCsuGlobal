@@ -27,10 +27,18 @@ def cartesian(A, B):
 
 
 def main():
-    A = [1,2]
-    B = [3,4]
+    A = []
+    B = []
+    userInput = ''
+    while userInput != -1:
+        userInput  = int(input("Please enter what you want in the first array (enter -1 tomove on): "))
+        if userInput != -1:
+            A.append(userInput)
 
-    print("AxB = ", end='')
+    while userInput != -1:
+        userInput  = int(input("Please enter what you want in the second array (enter -1 tomove on): "))
+        if userInput != -1:
+            B.append(userInput)
     print(cartesian(A, B))
 
 
