@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Recursion {
@@ -16,11 +17,8 @@ public class Recursion {
 			return arr[0];
 		}
 		else {
-			double[] newArr = new double[arr.length - 1];
-			for(int i = 1; i < arr.length; i++) {
-				newArr[i - 1] = arr[i];
-			}
-			return arr[0] * productOfNums(newArr);
+			double[] newArr = Arrays.copyOfRange(arr, 0, arr.length - 1);
+			return arr[arr.length - 1] * productOfNums(newArr);
 		}
 	}
 }
