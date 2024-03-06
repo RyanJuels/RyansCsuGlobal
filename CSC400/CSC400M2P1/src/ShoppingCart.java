@@ -47,6 +47,10 @@ public class ShoppingCart implements BagInterface<Item> {
 					return true;
 				}
 			}
+			System.out.println("Item is not in cart");
+		}
+		else {
+			System.out.println("Cart is empty");
 		}
 		return false;
 	}
@@ -54,5 +58,11 @@ public class ShoppingCart implements BagInterface<Item> {
 	@Override
 	public Item[] toArray() {
 		return myBag;
+	}
+
+	@Override
+	public void clear() {
+		myBag = new Item[default_capacity];
+		
 	}
 }

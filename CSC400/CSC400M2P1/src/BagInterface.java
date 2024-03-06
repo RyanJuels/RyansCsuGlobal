@@ -4,4 +4,5 @@ public interface BagInterface<T> {
 	public boolean isEmpty();
 	public boolean add(T newItem);
 	public boolean remove(T anItem);
+	public void clear();
 }
