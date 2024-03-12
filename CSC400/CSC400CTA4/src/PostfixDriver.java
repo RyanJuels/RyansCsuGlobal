@@ -1,7 +1,7 @@
 
 public class PostfixDriver {
 	public static void main(String[] args) {
-		String firstString = "a/b*(c+(d-e))";
+		String firstString = "(a+b+c)*d*e/f";
 		String secondString = "(a+b)/(c−d)";
 		String thirdString = "a/(b−c)*d";
 		String fourthString = "a−(b/(c−d)*e+f)^g";
