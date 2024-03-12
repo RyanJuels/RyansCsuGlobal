@@ -60,5 +60,9 @@ public class BagDemo {
 		System.out.println();
 		displayBag(myCart);
 		
+		myCart.clear();
+		System.out.println();
+		displayBag(myCart);
+		
 	}
 }
