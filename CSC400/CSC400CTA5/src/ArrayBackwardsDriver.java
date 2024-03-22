@@ -1,3 +1,4 @@
+import java.util.Arrays;
 
 public class ArrayBackwardsDriver {
 	public static void main(String[] args) {
@@ -6,13 +7,15 @@ public class ArrayBackwardsDriver {
 		ArrayBackwards a = new ArrayBackwards();
 		
 		String[] resultOne = a.arrayBack(arrayOne, 0, arrayOne.length - 1);
-		for (String i : resultOne) {
-			System.out.println(i);
-		}
+		System.out.println("Reversed String array");
+		System.out.println("-----------------------------------------");
+		System.out.println(Arrays.toString(resultOne));
+		
+		
 		
 		Integer[] resultTwo = a.arrayBack(arrayTwo, 0, arrayTwo.length - 1);
-		for (int i : resultTwo) {
-			System.out.println(i);
-		}
+		System.out.println("\n\nReversed Integer array");
+		System.out.println("-----------------------------------------");
+		System.out.println(Arrays.toString(resultTwo));
 	}
 }
