@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sierpinski Gasket</title>
+
+    </head>
+    <body>
+        <div>
+            Number of Fractals  1 <input id="slider_step" type="range" min="1" max="10" step="1" value="1" /> 10 <br />
+        </div>
+        <canvas id="glCanvas" width="1000" height="1000"></canvas>
+        <script id="vertex-shader" type="x-shader/x-vertex">
+            attribute vec2 vPosition;
+            void main(void) { 
+                gl_Position = vec4(vPosition, 0, 1); 
+            }
+        </script>
+
+        <script id="fragment-shader" type="x-shader/x-fragment">
+            precision mediump float;
+            void main() {
+                gl_FragColor = vec4(0.0, 0.0, 1.0, 1);
+            }
+        </script>
+        <script>
+
+            var canvas;
+            var gl;
+            var points = [];
+            var subDivide = 1;
+            var buffer;
+
+            function init() {
+                canvas = document.getElementById("glCanvas");
+
+                gl= canvas.getContext('webgl');
+
+                gl.clearColor(1.0, 1.0, 1.0, 1.0);
+
+                var vertexShaderSource = document.getElementById("vertex-shader").textContent;
+                var vertexShader = gl.createShader(gl.VERTEX_SHADER);
+                gl.shaderSource(vertexShader, vertexShaderSource);
+                gl.compileShader(vertexShader);
+
+                var fragmentShaderSource = document.getElementById("fragment-shader").textContent;
+                var fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
+                gl.shaderSource(fragmentShader, fragmentShaderSource);
+                gl.compileShader(fragmentShader);
+
+                var shaderProgram = gl.createProgram();
+                gl.attachShader(shaderProgram, vertexShader);
+                gl.attachShader(shaderProgram, fragmentShader);
+                gl.linkProgram(shaderProgram);
+                gl.useProgram(shaderProgram);
+
+                buffer = gl.createBuffer();
+
+                gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+                gl.bufferData(gl.ARRAY_BUFFER, 8 * Math.pow(3, 6), gl.STATIC_DRAW);
+
+                var vPosition = gl.getAttribLocation(shaderProgram, "vPosition" );
+                gl.vertexAttribPointer(vPosition, 2, gl.FLOAT, false, 0, 0);
+                gl.enableVertexAttribArray(vPosition);
+
+                slider_step = document.getElementById("slider_step");
+
+                slider_step.onchange = function() {
+                    subDivide = event.srcElement.value;
+                    render();
+                }
+
+
+                render();
+            }
+
+            function pushTriangle(a, b, c) {
+                points.push(a[0], a[1], b[0], b[1], c[0], c[1]);
+            }
+
+            function bisect(vec1, vec2) {
+                var newVec = [
+                    (vec1[0] + vec2[0]) / 2,
+                    (vec1[1] + vec2[1]) / 2
+                ];
+                return newVec;
+            }
+
+            function divideTriangle(a, b, c, count) {
+
+                if (count <= 0) {
+                    pushTriangle(a, b, c);
+                }
+                else {
+                    var ab = bisect(a, b);
+                    var bc = bisect(b, c);
+                    var ac = bisect(a, c);
+
+                    divideTriangle(a, ab, ac, count - 1);
+                    divideTriangle(b, bc, ab, count - 1);
+                    divideTriangle(c, ac, bc, count - 1);
+                }
+            }
+
+            function render() {
+                var vertices = [[-1, -1], [0, 1], [1, -1]];
+                points = [];
+                divideTriangle(vertices[0], vertices[1], vertices[2], subDivide);
+                gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(points), gl.STATIC_DRAW);
+                gl.clear(gl.COLOR_BUFFER_BIT);
+                gl.drawArrays(gl.TRIANGLES, 0, points.length);
+            }
+
+            window.onload = init;
+        </script>
+    </body>
+</html>
