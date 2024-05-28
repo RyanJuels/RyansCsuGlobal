@@ -18,6 +18,72 @@ var wireSphere = function() {
     var top = 2.0;
     var bottom = -2.0;
 
+    var boxVertices = 
+        [
+            //Top
+            -1, 1, -1,   .5, .5, .5,
+            -1, 1, 1,    .5, .5, .5,
+            1, 1, 1,     .5, .5, .5,
+            1, 1, -1,    .5, .5, .5,
+
+            //Left
+            -1, 1, 1,    .75, .25, .5,
+            -1, -1, 1,   .75, .25, .5,
+            -1, -1, -1,  .75, .25, .5,
+            -1, 1, -1,   .75, .25, .5,
+
+            //Right
+            1, 1, 1,    0, 0, 1,
+            1, -1, 1,   0, 0, 1,
+            1, -1, -1,  0, 0, 1,
+            1, 1, -1,   0, 0, 1,
+
+            //Front
+            1, 1, 1,    1, 0, .15,
+            1, -1, 1,    1, 0, .15,
+            -1, -1, 1,    1, 0, .15,
+            -1, 1, 1,    1, 0, .15,
+
+            //Back
+            1, 1, -1,    0, 1, .15,
+            1, -1, -1,    0, 1, .15,
+            -1, -1, -1,    0, 1, .15,
+            -1, 1, -1,    0, 1, .15,
+
+            //Bottom
+            -1, -1, -1,   0, 0, 0,
+            -1, -1, 1,    0, 0, 0,
+            1, -1, 1,     0, 0, 0,
+            1, -1, -1,    0, 0, 0,
+        ];
+
+        var boxIndices =
+        [
+            // Top
+            0, 1, 2,
+            0, 2, 3,
+
+            // Left
+            5, 4, 6,
+            6, 4, 7,
+
+            // Right
+            8, 9, 10,
+            8, 10, 11,
+
+            // Front
+            13, 12, 14,
+            15, 14, 12,
+
+            // Back
+            16, 17, 18,
+            16, 18, 19,
+
+            // Bottom
+            21, 20, 22,
+            22, 20, 23
+        ];
+
     var modelViewMatrix, projectionMatrix;
     var modelViewMatrixLoc, projectionMatrixLoc;
     var eye;
@@ -92,46 +158,37 @@ var wireSphere = function() {
         var program = initShaders(gl, "vertex-shader", "fragment-shader");
         gl.useProgram(program);
 
-        positions = [
-            -1, 1, -1,
-            -1, 1, 1,
-            1, 1, 1,
-            1, 1, -1,
+        var boxVertexBufferObject = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, boxVertexBufferObject);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(boxVertices), gl.STATIC_DRAW);
 
-            //Left
-            -1, 1, 1,
-            -1, -1, 1,
-            -1, -1, -1,
-            -1, 1, -1,
+        var boxIndexBufferObject = gl.createBuffer();
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, boxIndexBufferObject);
+        gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(boxIndices), gl.STATIC_DRAW);
 
-            //Right
-            1, 1, 1,
-            1, -1, 1,
-            1, -1, -1,
-            1, 1, -1,
+        var positionAttribLocation = gl.getAttribLocation(program, 'aPosition');
+        var colorAttribLocation = gl.getAttribLocation(program, 'aColor');
+        gl.vertexAttribPointer(
+            positionAttribLocation,
+            3,
+            gl.FLOAT,
+            gl.FALSE,
+            6 * Float32Array.BYTES_PER_ELEMENT,
+            0
+        );
+        gl.vertexAttribPointer(
+            colorAttribLocation,
+            3,
+            gl.FLOAT,
+            gl.FALSE,
+            6 * Float32Array.BYTES_PER_ELEMENT,
+            3 * Float32Array.BYTES_PER_ELEMENT
+        );
 
-            //Front
-            1, 1, 1,
-            1, -1, 1,
-            -1, -1, 1,
-            -1, 1, 1,
+        gl.enableVertexAttribArray(positionAttribLocation);
+	    gl.enableVertexAttribArray(colorAttribLocation);
 
-            //Back
-            1, 1, -1,
-            1, -1, -1,
-            -1, -1, -1,
-            -1, 1, -1,
 
-            //Bottom
-            -1, -1, -1,
-            -1, -1, 1,
-            1, -1, 1,
-            1, -1, -1,
-        ];
-
-        var pBuffer = gl.createBuffer();
-        gl.bindBuffer(gl.ARRAY_BUFFER, pBuffer);
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
 
         var positionLoc = gl.getAttribLocation( program, "aPosition");
         gl.vertexAttribPointer( positionLoc, 4, gl.FLOAT, false, 0, 0);
@@ -167,7 +224,7 @@ var wireSphere = function() {
 
 
         
-        gl.drawArrays(gl.TRIANGLES, 0, positions.length);
+        gl.drawElements(gl.TRIANGLES, boxIndices.length, gl.UNSIGNED_SHORT, 0);
 
         requestAnimationFrame(render);
     }
