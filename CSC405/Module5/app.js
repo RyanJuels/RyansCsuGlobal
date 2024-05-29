@@ -158,6 +158,8 @@ var wireSphere = function() {
         var program = initShaders(gl, "vertex-shader", "fragment-shader");
         gl.useProgram(program);
 
+        gl.enable(gl.DEPTH_TEST);
+
         var boxVertexBufferObject = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, boxVertexBufferObject);
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(boxVertices), gl.STATIC_DRAW);
