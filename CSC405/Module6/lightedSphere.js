@@ -14,16 +14,13 @@ var Sphere = function() {
     var lightDiffuse = vec4(1.0, 1.0, 2471.0, 1.0);
     var lightSpecular = vec4(1.0, 1.0, 1.0, 1.0);
 
-    var lightPosition = vec4(-1.0, -1.0, 2.0, .5);
+    var lightPosition = vec4(-1.0, -1.0, 2.0, 0.5);
 
     var materialAmbient = vec4(1.0, 0.0, 1.0, 1.0);
     var materialDiffuse = vec4(1.0, 0.8, 0.0, 1.0);
     var materialSpecular = vec4(1.0, 0.8, 0.0, 1.0);
 
-    var materialShininess = 100.0;
-
-    var ambientColor, diffuseColor, specularColor;
-
+    var materialShininess = 200.0;
 
     var near = -10;
     var far = 10;
