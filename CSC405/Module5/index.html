@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <script id="vertex-shader" type="x-shader/x-vertex">
+        #version 300 es
+
+        in vec4 aPosition;
+        in vec4 aColor;
+        out vec4 vColor;
+
+        uniform mat4 uModelViewMatrix;
+        uniform mat4 uProjectionMatrix;
+
+        void main()
+        {
+          vColor = aColor;
+          gl_Position = uProjectionMatrix * uModelViewMatrix * aPosition;
+        }
+    </script>
+
+    <script id="fragment-shader" type="x-shader/x-fragment">
+        #version 300 es
+
+        precision mediump float;
+
+        in vec4 vColor;
+        out vec4 fColor;
+
+        void main()
+        {
+        fColor = vColor;
+
+        }
+    </script>
+    <script src="gl-matrix.js"></script>
+    <script src="app.js"></script>
+
+    <p> </p>
+    <button id = "Button0">Increase theta</button>
+    <button id = "Button1">Decrease theta</button>
+    <button id = "Button2">Increase phi</button>
+    <button id = "Button3">Decrease phi</button>
+    <p> </p>    
+
+    <body>
+        <canvas id="gl-canvas" width="600" height="600"></canvas>
+        <div>
+            depth 0.05
+            <input id="depthSlider" type="range" min="0.05" max="3" step="0.1" value="2">
+            3
+        </div>
+    </body>
+</html>
