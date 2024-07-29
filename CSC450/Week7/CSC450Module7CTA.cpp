@@ -30,9 +30,8 @@ void decrease_count() {
 int main() {
     
     thread t1(increase_count);
-    thread t2(decrease_count);
-
     t1.join();
+    thread t2(decrease_count);
     t2.join();
 
 
